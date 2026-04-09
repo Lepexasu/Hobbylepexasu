@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lepexasu | Hobby</title>
-    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        @import url('https://googleapis.com');
+
         :root {
             --bg-color: #050505;
-            --accent-purple: #bc13fe;
-            --bright-purple: #d670ff;
+            --accent-gold: #ffcc00;
+            --bright-gold: #fff0a4;
             --pixel-font: 'Press Start 2P', cursive;
         }
 
@@ -19,7 +20,6 @@
         }
 
         @keyframes blinker { 50% { opacity: 0; } }
-
         .blink { animation: blinker 1s linear infinite; }
 
         .fade-out {
@@ -36,80 +36,98 @@
 
         body {
             margin: 0;
+            padding: 40px 20px;
             background-color: var(--bg-color);
             background-image: 
-                linear-gradient(0deg, rgba(188, 19, 254, 0.05) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(188, 19, 254, 0.05) 2px, transparent 2px);
+                linear-gradient(0deg, rgba(255, 204, 0, 0.05) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 204, 0, 0.05) 2px, transparent 2px);
             background-size: 40px 40px;
             color: #fff;
             font-family: var(--pixel-font);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
         }
 
         body::before {
             content: " ";
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
             background-size: 100% 4px;
             pointer-events: none;
             z-index: 100;
         }
 
+        .header-images {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .header-images img {
+            flex: 1;
+            height: 180px;
+            width: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-gold);
+            image-rendering: pixelated;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+        }
+
         .card {
             background: rgba(0, 0, 0, 0.95);
-            border: 4px double var(--accent-purple);
-            padding: 40px;
+            border: 4px double var(--accent-gold);
+            padding: 30px;
             text-align: center;
-            box-shadow: 10px 10px 0px rgba(188, 19, 254, 0.15);
+            box-shadow: 10px 10px 0px rgba(255, 204, 0, 0.1);
             animation: fadeIn 0.8s ease-out;
-            max-width: 800px;
-            width: 90%;
+            max-width: 500px;
+            width: 100%;
             position: relative;
             z-index: 1;
         }
 
         h1 {
-            font-size: 1.4rem;
-            color: var(--bright-purple);
-            text-shadow: 0 0 10px var(--accent-purple);
-            margin-bottom: 40px;
-        }
-
-        .hobby-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            font-size: 1.1rem;
+            color: var(--bright-gold);
+            text-shadow: 0 0 10px var(--accent-gold);
             margin-bottom: 30px;
         }
 
+        .hobby-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
         .hobby-item {
-            border: 2px solid var(--accent-purple);
+            border: 2px solid var(--accent-gold);
             padding: 15px;
-            background: rgba(188, 19, 254, 0.05);
+            background: rgba(255, 204, 0, 0.05);
             text-align: left;
             transition: 0.3s;
         }
 
         .hobby-item:hover {
-            background: rgba(188, 19, 254, 0.15);
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
+            background: rgba(255, 204, 0, 0.15);
+            transform: translateX(5px);
         }
 
         .hobby-title {
-            color: var(--accent-purple);
-            font-size: 0.6rem;
+            color: var(--accent-gold);
+            font-size: 0.55rem;
             margin-bottom: 10px;
             display: block;
         }
 
         .hobby-desc {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             line-height: 1.6;
             color: #eee;
         }
@@ -117,11 +135,11 @@
         .disconnect-btn {
             display: inline-block;
             margin-top: 10px;
-            padding: 15px 35px;
+            padding: 12px 30px;
             border: 2px solid #444;
             color: #444;
             text-decoration: none;
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             cursor: pointer;
             transition: 0.3s;
             background: none;
@@ -129,14 +147,25 @@
         }
 
         .disconnect-btn:hover {
-            border-color: #ff0000;
-            color: #ff0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+        }
+.hobby-item {
+            overflow: visible;
         }
 
-        @media (max-width: 650px) {
-            .hobby-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 1rem; }
+        .hobby-desc {
+            display: block;
+            transition: 0.3s ease-in-out;
+            transform-origin: left center;
+        }
+
+        .hobby-item:hover .hobby-desc {
+            transform: scale(1.5);
+            color: var(--bright-gold);
+            z-index: 10;
+            position: relative;
         }
     </style>
 </head>
@@ -144,25 +173,30 @@
 
     <div class="fade-out"></div>
 
+    <div class="header-images">
+        <img src="https://i.ibb.co/wFcZLCkB/photo-2026-04-09-18-35-47.jpg" alt="Photo 1">
+        <img src="https://i.ibb.co/CDb9LSS/photo-2026-04-09-18-36-02.jpg" alt="Photo 2">
+    </div>
+
     <div class="card">
         <h1>MY HOBBIES<span class="blink">_</span></h1>
 
         <div class="hobby-grid">
             <div class="hobby-item">
-                <span class="hobby-title">[ XXX ]</span>
-                <span class="hobby-desc">XXX.</span>
+                <span class="hobby-title">[ HOBBY 01 ]</span>
+                <span class="hobby-desc">Construction in Minecraft.</span>
             </div>
             <div class="hobby-item">
-                <span class="hobby-title">[ XXX ]</span>
-                <span class="hobby-desc">XXX.</span>
+                <span class="hobby-title">[ HOBBY 02 ]</span>
+                <span class="hobby-desc">Cooking.</span>
             </div>
             <div class="hobby-item">
-                <span class="hobby-title">[ XXX ]</span>
-                <span class="hobby-desc">XXX.</span>
+                <span class="hobby-title">[ HOBBY 03 ]</span>
+                <span class="hobby-desc">Cycling.</span>
             </div>
             <div class="hobby-item">
-                <span class="hobby-title">[ XXX ]</span>
-                <span class="hobby-desc">XXX.</span>
+                <span class="hobby-title">[ HOBBY 04 ]</span>
+                <span class="hobby-desc">Board games.</span>
             </div>
         </div>
 
